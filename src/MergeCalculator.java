@@ -21,6 +21,20 @@ class MergeCalculator {
         return targetPopByGen;
     }
 
+    int[] getTargetPopByGen(int specifiedGen, int royalPop) {
+        int[] targetPopByGen = new int[specifiedGen];
+
+        for(int i = 0; i < targetPopByGen.length; ++i) {
+            if (i == 0) {
+                targetPopByGen[i] = royalPop;
+            } else {
+                targetPopByGen[i] = getTotalParentsNeeded(targetPopByGen[i-1]);
+            }
+        }
+
+        return targetPopByGen;
+    }
+
     private int getTotalParentsNeeded (int childrenNeeded) {
         int totalParentsNeeded = 0;
 

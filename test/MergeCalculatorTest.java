@@ -3,17 +3,21 @@ import org.junit.Test;
 
 public class MergeCalculatorTest {
     private MergeCalculator calculator;
+    private int specifiedGen;
+    private int[] targetPopByGen;
 
     public MergeCalculatorTest() {
         calculator = new MergeCalculator();
     }
 
     @Test
-    public void FinalPopulationOf2ReturnsGen0PopulationOf2() {
-        int specifiedGen = 2;
-        int[] targetPopByGen = calculator.getTargetPopByGen(specifiedGen);
+    public void specifiedGenOf2ReturnsGenLength2() {
+        specifiedGen = 1;
 
-        Assert.assertEquals(targetPopByGen.length, 2);
+        targetPopByGen = calculator.getTargetPopByGen(specifiedGen);
+
+        Assert.assertEquals(targetPopByGen.length, specifiedGen);
     }
+
 
 }

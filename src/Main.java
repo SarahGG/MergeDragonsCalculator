@@ -14,7 +14,7 @@ public class Main {
 
         // asks the user what level ("generation") item they need, and how many of them they need ("population")
         int specifiedGen = collector.collectIntResponse(scanner,"What lvl of item are you trying to obtain?");
-        int finalGenPop = collector.collectIntResponse(scanner,"How many do you need?");
+        int royalPop = collector.collectIntResponse(scanner,"How many do you need?");
 
         // establishes how many items the user already has at each lvl of "life"
         int[] currentPopByGen = collector.collectIntArrayResponses(scanner,specifiedGen - 1);

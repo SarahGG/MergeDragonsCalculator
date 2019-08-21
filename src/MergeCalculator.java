@@ -1,10 +1,21 @@
 class MergeCalculator {
     private int numChildrenPerLgMerge;
     private int numParentPerLgMerge;
+    private int numChildrenPerSmMerge;
+    private int numParentPerSmMerge;
 
-    public MergeCalculator() {
+    MergeCalculator() {
         numChildrenPerLgMerge = 3;
         numParentPerLgMerge = 10;
+        numChildrenPerSmMerge = 1;
+        numParentPerSmMerge = 4;
+    }
+
+    MergeCalculator(int numChildrenPerLgMerge, int numParentPerLgMerge, int numChildrenPerSmMerge, int numParentPerSmMerge) {
+        this.numChildrenPerLgMerge = numChildrenPerLgMerge;
+        this.numParentPerLgMerge = numParentPerLgMerge;
+        this.numChildrenPerSmMerge = numChildrenPerSmMerge;
+        this.numParentPerSmMerge = numParentPerSmMerge;
     }
 
     int[] getTargetPopByGen(int specifiedGen, int royalPop, int[] currentPopByGen) {
@@ -41,10 +52,21 @@ class MergeCalculator {
         totalParentsNeeded += getTotalParentsNeededForLgMerges(childrenNeeded);
         childrenNeeded = childrenNeeded % numChildrenPerLgMerge;
 
+        totalParentsNeeded += getTotalParentsNeededForSmMerges(childrenNeeded);
+        childrenNeeded = childrenNeeded % numChildrenPerSmMerge;
+
+        if(childrenNeeded > 0) {
+            totalParentsNeeded += numParentPerSmMerge;
+        }
+
         return totalParentsNeeded;
     }
 
     private int getTotalParentsNeededForLgMerges(int childrenNeeded) {
         return (childrenNeeded / numChildrenPerLgMerge) * numParentPerLgMerge;
+    }
+
+    private int getTotalParentsNeededForSmMerges(int childrenNeeded) {
+        return (childrenNeeded / numChildrenPerSmMerge) * numParentPerSmMerge;
     }
 }

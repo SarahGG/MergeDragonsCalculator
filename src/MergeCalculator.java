@@ -14,7 +14,7 @@ class MergeCalculator {
             if (i == 0) {
                 targetPopByGen[i] = royalPop - currentPopByGen[i];
             } else {
-                targetPopByGen[i] = getTotalParentsNeeded(targetPopByGen[i-1]);
+                targetPopByGen[i] = getTotalParentsNeeded(targetPopByGen[i-1]) - currentPopByGen[i];
             }
         }
 

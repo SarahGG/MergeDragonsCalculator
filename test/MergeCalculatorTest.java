@@ -10,14 +10,13 @@ public class MergeCalculatorTest {
 
     public MergeCalculatorTest() {
         calculator = new MergeCalculator();
+        specifiedGen = 1;
+        royalPop = 3;
+        currentPopByGen = new int[]{0};
     }
 
     @Test
     public void specifiedGenOf2ReturnsGenLength2() {
-        specifiedGen = 1;
-        royalPop = 3;
-        currentPopByGen = new int[]{0};
-
         targetPopByGen = calculator.getTargetPopByGen(specifiedGen, royalPop, currentPopByGen);
 
         Assert.assertEquals(targetPopByGen.length, specifiedGen);
@@ -25,10 +24,6 @@ public class MergeCalculatorTest {
 
     @Test
     public void royalPopOf3ReturnsGen0PopOf3() {
-        specifiedGen = 1;
-        royalPop = 3;
-        currentPopByGen = new int[]{0};
-
         targetPopByGen = calculator.getTargetPopByGen(specifiedGen, royalPop, currentPopByGen);
 
         Assert.assertEquals(targetPopByGen[0], 3);
@@ -36,12 +31,20 @@ public class MergeCalculatorTest {
 
     @Test
     public void royalPopOf3And1OwnedReturnsGen0PopOf2() {
-        specifiedGen = 1;
-        royalPop = 3;
         currentPopByGen = new int[]{1};
 
-        targetPopByGen = calculator.getTargetPopByGen(specifiedGen, royalPop, currentPopByGen);
+        targetPopByGen = calculator.getTargetPopByGen(specifiedGen,royalPop, currentPopByGen);
 
         Assert.assertEquals(targetPopByGen[0], 2);
+    }
+
+    @Test
+    public void royalPopOf3ReturnsGen1PopOf10() {
+        specifiedGen = 2;
+
+        targetPopByGen = calculator.getTargetPopByGen(specifiedGen,royalPop,currentPopByGen);
+
+        Assert.assertEquals(targetPopByGen[1], 10);
+
     }
 }
